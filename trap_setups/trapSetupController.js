@@ -1,3 +1,5 @@
+const e = require('express');
+
 // Import Trap Setup model
 TrapSetup = require('./trapSetupModel');
 
@@ -78,9 +80,10 @@ exports.update = function (request, response) {
     } else {
       if (trapSetup === null) {
         response.json({
-          message: 'There is no Trap Setup for ' + request.params.island + ' Island to reassign'
+          message: 'There is no Trap Setup for ' + request.params.island + ' Island to update'
         });
       } else {
+        initialIsland = trapSetup.island;
         trapSetup.island = request.body.island;
         trapSetup.weapon = request.body.weapon;
         trapSetup.base = request.body.base;
@@ -92,10 +95,17 @@ exports.update = function (request, response) {
           if (error) {
             response.json(error);
           } else {
-            response.json({
-              message: 'Trap Setup for ' + request.params.island + ' Island has been reassigned for ' + request.body.island + ' Island',
-              data: trapSetup
-            });
+            if (initialIsland !== request.body.island) {
+              response.json({
+                message: 'Trap Setup for ' + request.params.island + ' Island has been reassigned for ' + request.body.island + ' Island',
+                data: trapSetup
+              });
+            } else {
+              response.json({
+                message: 'Trap Setup for ' + request.params.island + ' Island has been updated',
+                data: trapSetup
+              });
+            }
           }
         });
       }
