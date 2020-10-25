@@ -36,3 +36,6 @@ app.use('/api', apiRoutes)
 app.listen(port, function () {
   console.log("Running MouseHunt Floating Islands Trap Setups on port " + port);
 });
+
+// Export app for testing
+module.exports = app;

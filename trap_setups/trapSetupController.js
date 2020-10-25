@@ -1,5 +1,3 @@
-const e = require('express');
-
 // Import Trap Setup model
 TrapSetup = require('./trapSetupModel');
 
