@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 let express = require('express')
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
@@ -14,11 +12,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // Connect to Mongoose and set connection variable
-const mongoURL = process.env.MONGODB_URI
-
-// 'mongodb://localhost/mhfi_traps'
-
-mongoose.connect(mongoURL, { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/mhfi_traps', { useNewUrlParser: true });
 
 var db = mongoose.connection;
 
