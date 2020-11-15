@@ -2,3 +2,13 @@ language: node_js
 node_js:
   - node
 services: mongodb
+
+jobs:
+  deploy:
+    provide: heroku
+    api_key: 85b45101-1112-4131-bf5e-ee68d64d9e4d
+    app: murmuring-island-28068
+
+  on:
+    repo: ernestyyh/cs3219-rest
+  skip_cleanup: true
