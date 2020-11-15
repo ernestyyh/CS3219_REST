@@ -1,6 +1,9 @@
+require('dotenv').config();
+
 let express = require('express')
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
+let cors = require('cors');
 let app = express();
 let apiRoutes = require("./api-routes")
 
@@ -10,9 +13,14 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
+app.use(cors())
 
 // Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/mhfi_traps', { useNewUrlParser: true });
+const mongoURL = process.env.ENVIRONMENT === "PRODUCTION"
+? process.env.MONGODB_URI
+: 'mongodb://localhost/mhfi_traps'
+
+mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var db = mongoose.connection;
 
